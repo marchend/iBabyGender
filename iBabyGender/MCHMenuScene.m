@@ -7,8 +7,9 @@
 //
 
 #import "MCHMenuScene.h"
-#import "MCHGameplayScene.h"
-#import "MCHLeaderboardScene.h"
+#import "MCHBalloonShootScene.h"
+#import "MCHPlinkoScene.h"
+#import "MCHClassicScene.h"
 
 @implementation MCHMenuScene
 
@@ -29,7 +30,7 @@
          */
         
         SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue UltraLight"];
-        title.text = @"JETPACK EXPLORER";
+        title.text = @"iBabyGender";
         title.fontSize = 38;
         title.fontColor = [UIColor whiteColor];
         title.position = CGPointMake(CGRectGetMidX(self.frame),self.frame.size.height - title.frame.size.height * 2);
@@ -42,25 +43,35 @@
          self.subtitle.position = CGPointMake(CGRectGetMidX(self.frame),self.title.position.y - self.title.frame.size.height);
          */
         
-        SKLabelNode *playButtonLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue UltraLight"];
-        playButtonLabel.text = @"NEW GAME";
-        playButtonLabel.fontSize = 28;
-        playButtonLabel.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame) - 30);
-        playButtonLabel.fontColor = [UIColor whiteColor];
-        [self addChild:playButtonLabel];
+        SKLabelNode *balloonShootButtonLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue UltraLight"];
+        balloonShootButtonLabel.text = @"BALLOON SHOOT";
+        balloonShootButtonLabel.fontSize = 28;
+        balloonShootButtonLabel.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame) - 30);
+        balloonShootButtonLabel.fontColor = [UIColor whiteColor];
+        [self addChild:balloonShootButtonLabel];
         
-        self.playButton = [SKSpriteNode spriteNodeWithColor:[UIColor clearColor] size:CGSizeMake(self.frame.size.width, playButtonLabel.frame.size.height+60)];
-        self.playButton.position = CGPointMake(CGRectGetMidX(self.frame),playButtonLabel.position.y+playButtonLabel.frame.size.height/2);
+        self.balloonShootButton = [SKSpriteNode spriteNodeWithColor:[UIColor clearColor] size:CGSizeMake(self.frame.size.width, balloonShootButtonLabel.frame.size.height+60)];
+        self.balloonShootButton.position = CGPointMake(CGRectGetMidX(self.frame),balloonShootButtonLabel.position.y+balloonShootButtonLabel.frame.size.height/2);
         
-        SKLabelNode *highScoreButtonLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue UltraLight"];
-        highScoreButtonLabel.text = @"HIGH SCORES";
-        highScoreButtonLabel.fontSize = 28;
-        highScoreButtonLabel.position = CGPointMake(CGRectGetMidX(self.frame),playButtonLabel.position.y - playButtonLabel.frame.size.height*4);
-        highScoreButtonLabel.fontColor = [UIColor whiteColor];
-        [self addChild:highScoreButtonLabel];
+        SKLabelNode *plinkoButtonLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue UltraLight"];
+        plinkoButtonLabel.text = @"PLINKO";
+        plinkoButtonLabel.fontSize = 28;
+        plinkoButtonLabel.position = CGPointMake(CGRectGetMidX(self.frame),balloonShootButtonLabel.position.y - balloonShootButtonLabel.frame.size.height*3);
+        plinkoButtonLabel.fontColor = [UIColor whiteColor];
+        [self addChild:plinkoButtonLabel];
         
-        self.leaderboardButton = [SKSpriteNode spriteNodeWithColor:[UIColor clearColor] size:CGSizeMake(self.frame.size.width, highScoreButtonLabel.frame.size.height+60)];
-        self.leaderboardButton.position = CGPointMake(CGRectGetMidX(self.frame),highScoreButtonLabel.position.y+highScoreButtonLabel.frame.size.height/2);
+        self.plinkoButton = [SKSpriteNode spriteNodeWithColor:[UIColor clearColor] size:CGSizeMake(self.frame.size.width, plinkoButtonLabel.frame.size.height+60)];
+        self.plinkoButton.position = CGPointMake(CGRectGetMidX(self.frame),plinkoButtonLabel.position.y+plinkoButtonLabel.frame.size.height/2);
+        
+        SKLabelNode *classicButtonLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue UltraLight"];
+        classicButtonLabel.text = @"BABY-BELLY (classic)";
+        classicButtonLabel.fontSize = 28;
+        classicButtonLabel.position = CGPointMake(CGRectGetMidX(self.frame),plinkoButtonLabel.position.y - balloonShootButtonLabel.frame.size.height*3);
+        classicButtonLabel.fontColor = [UIColor whiteColor];
+        [self addChild:classicButtonLabel];
+        
+        self.classicButton = [SKSpriteNode spriteNodeWithColor:[UIColor clearColor] size:CGSizeMake(self.frame.size.width, classicButtonLabel.frame.size.height+60)];
+        self.classicButton.position = CGPointMake(CGRectGetMidX(self.frame),classicButtonLabel.position.y+classicButtonLabel.frame.size.height/2);
         
         NSDictionary* infoDict = [[NSBundle mainBundle] infoDictionary];
         NSString* version = [infoDict objectForKey:@"CFBundleVersion"];
@@ -71,8 +82,9 @@
         versionDisplay.fontColor = [UIColor whiteColor];
         [self addChild:versionDisplay];
         
-        [self addChild:self.playButton];
-        [self addChild:self.leaderboardButton];
+        [self addChild:self.balloonShootButton];
+        [self addChild:self.plinkoButton];
+        [self addChild:self.classicButton];
         
     }
     return self;
@@ -82,15 +94,20 @@
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
-    if([node isEqual:self.playButton]){
-        SKScene *gameScene = [[MCHGameplayScene alloc] initWithSize:self.size];
+    if([node isEqual:self.balloonShootButton]){
+        SKScene *balloonScene = [[MCHBalloonShootScene alloc] initWithSize:self.size];
         SKTransition *doors = [SKTransition doorsOpenHorizontalWithDuration:0.5];
-        [self.view presentScene:gameScene transition:doors];
-    }else if([node isEqual:self.leaderboardButton]){
-        SKScene *leaderboardScene = [[MCHLeaderboardScene alloc] initWithSize:self.size];
+        [self.view presentScene:balloonScene transition:doors];
+    }else if([node isEqual:self.plinkoButton]){
+        SKScene *plinkoScene = [[MCHPlinkoScene alloc] initWithSize:self.size];
         SKTransition *doors = [SKTransition doorsOpenHorizontalWithDuration:0.5];
-        [self.view presentScene:leaderboardScene transition:doors];
+        [self.view presentScene:plinkoScene transition:doors];
+    }else if([node isEqual:self.classicButton]){
+        SKScene *classicScene = [[MCHClassicScene alloc] initWithSize:self.size];
+        SKTransition *doors = [SKTransition doorsOpenHorizontalWithDuration:0.5];
+        [self.view presentScene:classicScene transition:doors];
     }
+
 }
 
 -(void)update:(CFTimeInterval)currentTime {

@@ -1,5 +1,5 @@
 //
-//  MCHGameplayScene.h
+//  MCHLeaderboardScene.h
 //  JetpackExplorer
 //
 //  Created by Marc Henderson on 2/10/2014.
@@ -8,6 +8,6 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-@interface MCHGameplayScene : SKScene
+@interface MCHPlinkoScene : SKScene
 
 @end

@@ -10,7 +10,8 @@
 
 @interface MCHMenuScene : SKScene
 
-@property (strong,atomic)SKSpriteNode *playButton;
-@property (strong,atomic)SKSpriteNode *leaderboardButton;
+@property (strong,atomic)SKSpriteNode *balloonShootButton;
+@property (strong,atomic)SKSpriteNode *plinkoButton;
+@property (strong,atomic)SKSpriteNode *classicButton;
 
 @end

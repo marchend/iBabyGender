@@ -1,14 +1,14 @@
 //
-//  MCHLeaderboardScene.m
+//  MCHGameplayScene.m
 //  JetpackExplorer
 //
 //  Created by Marc Henderson on 2/10/2014.
 //  Copyright (c) 2014 Marc Henderson. All rights reserved.
 //
 
-#import "MCHLeaderboardScene.h"
+#import "MCHBalloonShootScene.h"
 
-@implementation MCHLeaderboardScene
+@implementation MCHBalloonShootScene
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
@@ -27,8 +27,8 @@
          */
         
         SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue UltraLight"];
-        title.text = @"leaderboard scene - put the high scores here!";
-        title.fontSize = 38;
+        title.text = @"Balloon scene";
+        title.fontSize = 24;
         title.fontColor = [UIColor whiteColor];
         title.position = CGPointMake(CGRectGetMidX(self.frame),self.frame.size.height - title.frame.size.height * 2);
         [self addChild:title];
@@ -36,6 +36,5 @@
     }
     return self;
 }
-
 
 @end

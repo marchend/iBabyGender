@@ -1,14 +1,14 @@
 //
-//  MCHGameplayScene.m
+//  MCHLeaderboardScene.m
 //  JetpackExplorer
 //
 //  Created by Marc Henderson on 2/10/2014.
 //  Copyright (c) 2014 Marc Henderson. All rights reserved.
 //
 
-#import "MCHGameplayScene.h"
+#import "MCHPlinkoScene.h"
 
-@implementation MCHGameplayScene
+@implementation MCHPlinkoScene
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
@@ -27,8 +27,8 @@
          */
         
         SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue UltraLight"];
-        title.text = @"gameplay scene - make it happen here!";
-        title.fontSize = 38;
+        title.text = @"Plinko scene";
+        title.fontSize = 24;
         title.fontColor = [UIColor whiteColor];
         title.position = CGPointMake(CGRectGetMidX(self.frame),self.frame.size.height - title.frame.size.height * 2);
         [self addChild:title];
@@ -36,5 +36,6 @@
     }
     return self;
 }
+
 
 @end
